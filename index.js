@@ -32,18 +32,19 @@ const displayProduct = (products) => {
         const {title, rating, price } = product;
         return (
             `<div class='box'>
-                <img src=${image}></>
-                <br>
-                <hr>
-                <h2>${title}</h2>
+                <div class='img-box'>
+                    <img class='images' src=${image}></img>
+                </div>
                 <div class='bottom'>
-                    <p>Rating:${rating}</p>
-                    <h3>$ ${price}.00</h3>
-                <button>Add to cart</button>
+                    <h2>${title}</h2>
+                    <p>Rating: ${rating}</p>
+                    <h3>$ ${price}</h3>
+                    <button>Add to cart</button>
                 </div>
             </div>`
         )
     }).join('')
 }
+
 
 
