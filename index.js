@@ -1,5 +1,5 @@
 const productList = document.querySelector('.store-products');
-const search = document.querySelector('.search-text'); 
+const search = document.querySelector('.search-text');
 search.addEventListener('keyup', getProducts);
 
 // Firstly, fetch data from api endpoint
@@ -11,21 +11,28 @@ async function getProducts(e) {
     })
     .then((data) => {
         let products = data.products;
-        const searchInput = e.target.value.toLowerCase(); 
-        const filteredProducts = products.filter((product) => {
-            return(
-                product.title.toLowerCase().includes(searchInput)
-            )
-        })
 
-        console.log(filteredProducts);
-        displayProduct(filteredProducts);
+        // if search bar is empty
+        if(search.value === '') {
+            displayProduct(products);
+        }
+        // if search bar has value
+        else {
+            const searchInput = e.target.value.toLowerCase(); 
+            const filteredProducts = products.filter((product) => {
+                return(
+                    product.title.toLowerCase().includes(searchInput)
+                )
+            })
+            displayProduct(filteredProducts);
+        }
     })
     .catch((err) => {
         console.log("Some error occur..", err);
     })
 }
 
+// Display products on the browser
 const displayProduct = (products) => {
     productList.innerHTML = products.map((product) => {
         const image = product.images[0];
@@ -46,5 +53,6 @@ const displayProduct = (products) => {
     }).join('')
 }
 
-
+// invoke the function to get the products
+getProducts();
 
